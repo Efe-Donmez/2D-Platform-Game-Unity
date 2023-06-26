@@ -6,10 +6,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     public Rigidbody2D rb;
     public float moveSpeed;
+    public static int rotateInt;
     public float jumpSpeed;
     public Animator animator;
-    private bool isAttack = false;
-    private bool isJump = false;
+    public static bool isAttack = false;
+    public static bool isJump = false;
     private Vector2 keyInput;
     void Start()
     {
@@ -19,6 +20,15 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (transform.rotation.y == 0)
+        {
+            rotateInt = 1;
+        }
+        else
+        {
+            rotateInt = -1;
+        }
 
         rb.velocity = new Vector2(keyInput.x * moveSpeed, rb.velocity.y);
 
@@ -32,10 +42,12 @@ public class PlayerController : MonoBehaviour
             this.transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
-        if (keyInput.x == 0) {
-            animator.SetBool("isRun",false);
+        if (keyInput.x == 0)
+        {
+            animator.SetBool("isRun", false);
         }
-        else {
+        else
+        {
             animator.SetBool("isRun", true);
         }
 
@@ -43,34 +55,42 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void OnMove(InputAction.CallbackContext context) {
+    public void OnMove(InputAction.CallbackContext context)
+    {
         keyInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && !isJump )
+        if (context.performed && !isJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             FallingAnimate(true);
         }
     }
 
-    public void FallingAnimate(bool jumpValue) {
+    public void FallingAnimate(bool jumpValue)
+    {
         animator.SetBool("isJump", jumpValue);
         isJump = jumpValue;
+        if (!jumpValue)
+        {
+            animator.SetBool("isFall", jumpValue);
+        }
     }
 
 
-    public void OnAttack(InputAction.CallbackContext context) {
-      isAttack =   context.ReadValueAsButton();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-
-        if(collision.gameObject.CompareTag("ground") ) {
+        if (collision.gameObject.CompareTag("ground"))
+        {
             FallingAnimate(false);
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isJump = true;
+        animator.SetBool("isFall", true);
     }
 }
