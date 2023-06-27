@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public static bool isFall = false;
     private Vector2 keyInput;
     public static bool isSlide = false;
+    public RectTransform healtBar;
+    public RectTransform staminaBar;
     void Start()
     {
         GlobalObjects.playerAudioSource.Play();
@@ -59,6 +61,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        staminaBar.sizeDelta = new Vector2(PlayerInfos.stamina,staminaBar.sizeDelta.y);
+        healtBar.sizeDelta = new Vector2(PlayerInfos.health,healtBar.sizeDelta.y);
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -90,7 +95,6 @@ public class PlayerController : MonoBehaviour
             FallingAnimate(true);
         }
     }
-
     public void FallingAnimate(bool jumpValue)
     {
         animator.SetBool("isJump", jumpValue);
@@ -121,8 +125,9 @@ public class PlayerController : MonoBehaviour
     public void OnSlide(InputAction.CallbackContext context)
     {
 
-        if (context.started && !isSlide)
+        if (context.started && !isSlide && PlayerInfos.stamina-20 >= 0)
         {
+            PlayerInfos.stamina -= 20;
             isSlide = true;
             animator.SetBool("isSlide", true);
             rb.AddForce(new Vector2(moveSpeed * 2 * rotateInt, 0), ForceMode2D.Impulse);
