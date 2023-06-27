@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7022506302882628337}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6987429062058978967}
   - component: {fileID: 8705172710899786289}
   - component: {fileID: 6372200034142788748}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Foots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,9 +139,9 @@ GameObject:
   - component: {fileID: 7517896421608314442}
   - component: {fileID: 2732609633273441783}
   - component: {fileID: 4629100179784922407}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -466,26 +466,26 @@ MonoBehaviour:
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 9f09384800000000
   m_ShapePath:
   - {x: -0.001282421, y: -0.14902477, z: 0}
   - {x: -0.008351598, y: -0.12516348, z: 0}
   - {x: -0.015322533, y: -0.040003575, z: 0}
   - {x: -0.011708728, y: 0.033741865, z: 0}
-  - {x: -0.013166037, y: 0.09277314, z: 0}
-  - {x: 0.0023186472, y: 0.09526549, z: 0}
+  - {x: -0.01954694, y: 0.099154055, z: 0}
+  - {x: 0.006147185, y: 0.10675112, z: 0}
   - {x: 0.006784722, y: 0.0859346, z: 0}
   - {x: 0.0070260074, y: 0.055993974, z: 0}
-  - {x: 0.013043454, y: -0.035765782, z: 0}
-  - {x: 0.0108861895, y: -0.10116551, z: 0}
-  - {x: 0.010230944, y: -0.12793207, z: 0}
-  m_ShapePathHash: -1676157632
+  - {x: 0.042395614, y: -0.02555634, z: 0}
+  - {x: 0.018543277, y: -0.11647967, z: 0}
+  - {x: 0.021716569, y: -0.1394177, z: 0}
+  m_ShapePathHash: 878267629
   m_Mesh: {fileID: 0}
-  m_InstanceId: 32564
+  m_InstanceId: -1354
   m_LocalBounds:
-    m_Center: {x: -0.0011395393, y: -0.026879638, z: 0}
-    m_Extent: {x: 0.014182994, y: 0.12214513, z: 0}
+    m_Center: {x: 0.011424337, y: -0.02113682, z: 0}
+    m_Extent: {x: 0.030971278, y: 0.12788795, z: 0}
 --- !u!114 &4629100179784922407
 MonoBehaviour:
   m_ObjectHideFlags: 0

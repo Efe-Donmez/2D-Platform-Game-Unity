@@ -10,7 +10,7 @@ public class AttackController : MonoBehaviour
     public float attackRange;
     public LayerMask enemyLayer;
 
-    public static float  AttackDelay = 0.8f;
+    public static float  AttackDelay = 0.4f;
     float nextAttackTime = 0;
 
 
