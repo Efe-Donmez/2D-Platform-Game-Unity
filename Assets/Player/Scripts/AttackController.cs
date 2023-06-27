@@ -9,33 +9,41 @@ public class AttackController : MonoBehaviour
     public Transform attackPoint;
     public float attackRange;
     public LayerMask enemyLayer;
+    public AudioClip missSwordAudio;
 
-    public static float  AttackDelay = 0.4f;
+    public static float AttackDelay = 0.4f;
     float nextAttackTime = 0;
 
 
     public void onAttack(InputAction.CallbackContext context)
     {
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        if (!PlayerController.isJump && Time.time >= nextAttackTime && context.started)
+        if (!PlayerController.isJump)
         {
-
-
-            PlayerController.isAttack = context.ReadValueAsButton();
-            UIController.attackInt++;
-            foreach (Collider2D enemy in hitEnemies)
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+            if (!PlayerController.isJump && Time.time >= nextAttackTime && context.started)
             {
-                enemy.GetComponent<Knight>().onHit(20);
+
+
+                PlayerController.isAttack = context.ReadValueAsButton();
+                UIController.attackInt++;
+                foreach (Collider2D enemy in hitEnemies)
+                {
+                    enemy.GetComponent<Knight>().onHit(20);
+                }
+
+                nextAttackTime = Time.time + AttackDelay;
+                Invoke("offAttack", AttackDelay);
+
             }
-
-            nextAttackTime = Time.time +AttackDelay;
-            Invoke("offAttack",AttackDelay);
-
-        }
-        else if (context.canceled)
-        {
-            PlayerController.isAttack = context.ReadValueAsButton();
+            else if (context.canceled)
+            {
+                PlayerController.isAttack = context.ReadValueAsButton();
+            }
+            if (hitEnemies.Length == 0)
+            {
+                GlobalObjects.playerAudioSource.PlayOneShot(missSwordAudio);
+            }
         }
 
 
@@ -45,7 +53,8 @@ public class AttackController : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    void offAttack(){
+    void offAttack()
+    {
         PlayerController.isAttack = false;
     }
 

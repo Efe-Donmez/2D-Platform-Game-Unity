@@ -11,6 +11,7 @@ public class Knight : MonoBehaviour
     public float hitPush;
     public ParticleSystem bloodEffect;
     public Animator animator;
+    public AudioClip hitAudio;
 
 
     private void Start() {
@@ -33,7 +34,7 @@ public class Knight : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
         Invoke("resetHitColor", AttackController.AttackDelay/2);
         rb.AddForce(new Vector2(PlayerController.rotateInt * hitPush, hitJump), ForceMode2D.Impulse);
-        
+        GlobalObjects.playerAudioSource.PlayOneShot(hitAudio);
         if(currentHealth <1){
             Die();
         }

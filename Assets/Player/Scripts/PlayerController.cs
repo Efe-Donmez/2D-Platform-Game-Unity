@@ -11,9 +11,12 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public static bool isAttack = false;
     public static bool isJump = false;
+    public static bool isFall = false;
     private Vector2 keyInput;
+    public static bool isSlide = false;
     void Start()
     {
+        GlobalObjects.playerAudioSource.Play();
     }
 
     // Update is called once per frame
@@ -30,18 +33,37 @@ public class PlayerController : MonoBehaviour
             rotateInt = -1;
         }
 
-        rb.velocity = new Vector2(keyInput.x * moveSpeed, rb.velocity.y);
-
-        if (keyInput.x > 0)
+        if (isSlide && rb.velocity.x == 0)
         {
-            this.transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        if (keyInput.x < 0)
-        {
+            offSlide();
 
-            this.transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
+
+
+        animator.SetBool("isAttack", isAttack);
+
+        if (!isSlide)
+        {
+
+            rb.velocity = new Vector2(keyInput.x * moveSpeed, rb.velocity.y);
+
+            if (keyInput.x > 0)
+            {
+                this.transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+            if (keyInput.x < 0)
+            {
+
+                this.transform.eulerAngles = new Vector3(0, 180, 0);
+            }
+        }
+
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        keyInput = context.ReadValue<Vector2>();
         if (keyInput.x == 0)
         {
             animator.SetBool("isRun", false);
@@ -50,18 +72,18 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isRun", true);
         }
+        if (isFall && keyInput.y < 0)
+        {
+            rb.AddForce(new Vector2(0, -20), ForceMode2D.Impulse);
+        }
 
-        animator.SetBool("isAttack", isAttack);
-
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        keyInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if(isSlide){
+            offSlide();
+        }
         if (context.performed && !isJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
@@ -76,6 +98,7 @@ public class PlayerController : MonoBehaviour
         if (!jumpValue)
         {
             animator.SetBool("isFall", jumpValue);
+            isFall = jumpValue;
         }
     }
 
@@ -92,5 +115,25 @@ public class PlayerController : MonoBehaviour
     {
         isJump = true;
         animator.SetBool("isFall", true);
+        isFall = true;
+    }
+
+    public void OnSlide(InputAction.CallbackContext context)
+    {
+
+        if (context.started && !isSlide)
+        {
+            isSlide = true;
+            animator.SetBool("isSlide", true);
+            rb.AddForce(new Vector2(moveSpeed * 2 * rotateInt, 0), ForceMode2D.Impulse);
+            Invoke("offSlide", 0.5f);
+        }
+    }
+    void offSlide()
+    {
+
+        isSlide = false;
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        animator.SetBool("isSlide", false);
     }
 }
