@@ -16,9 +16,13 @@ public class PlayerController : MonoBehaviour
     public static bool isSlide = false;
     public RectTransform healtBar;
     public RectTransform staminaBar;
+    public static float health = 100;
+    public AudioClip stepSound;
+    public ParticleSystem bloadEffect;
     void Start()
     {
         GlobalObjects.playerAudioSource.Play();
+        health = PlayerInfos.health;
     }
 
     // Update is called once per frame
@@ -61,32 +65,67 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        staminaBar.sizeDelta = new Vector2(PlayerInfos.stamina,staminaBar.sizeDelta.y);
-        healtBar.sizeDelta = new Vector2(PlayerInfos.health,healtBar.sizeDelta.y);
+        staminaBar.sizeDelta = new Vector2(PlayerInfos.stamina, staminaBar.sizeDelta.y);
+        healtBar.sizeDelta = new Vector2(PlayerInfos.health, healtBar.sizeDelta.y);
+
+        if (PlayerInfos.health != health)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
+            Invoke("resetHitColor", 0.3f);
+            rb.AddForce(new Vector2(PlayerController.rotateInt*-1 * jumpSpeed/2, jumpSpeed/3), ForceMode2D.Impulse);
+            bloadEffect.Play();
+            health = PlayerInfos.health;
+        }
 
     }
 
+    void resetHitColor()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1f, 1f, 1);
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         keyInput = context.ReadValue<Vector2>();
         if (keyInput.x == 0)
         {
             animator.SetBool("isRun", false);
+            pauseSound();
         }
         else
         {
             animator.SetBool("isRun", true);
+            Invoke("stepSoundPlay", 0.3f);
         }
         if (isFall && keyInput.y < 0)
         {
             rb.AddForce(new Vector2(0, -20), ForceMode2D.Impulse);
         }
+        if (isFall)
+        {
+            pauseSound();
+        }
 
+    }
+
+    void pauseSound()
+    {
+        GlobalObjects.playerAudioSource.Pause();
+    }
+
+
+    void stepSoundPlay()
+    {
+        if (rb.velocity.x != 0 && !isFall)
+        {
+            //GlobalObjects.playerAudioSource.clip = stepSound;
+            GlobalObjects.playerAudioSource.Play();
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(isSlide){
+        if (isSlide)
+        {
             offSlide();
         }
         if (context.performed && !isJump)
@@ -117,15 +156,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+
         isJump = true;
         animator.SetBool("isFall", true);
         isFall = true;
+
     }
 
     public void OnSlide(InputAction.CallbackContext context)
     {
 
-        if (context.started && !isSlide && PlayerInfos.stamina-20 >= 0)
+        if (context.started && !isSlide && PlayerInfos.stamina - 20 >= 0 && !isFall)
         {
             PlayerInfos.stamina -= 20;
             isSlide = true;

@@ -25,12 +25,14 @@ public class Knight : MonoBehaviour
         }else{
             animator.SetBool("isRun",false);
         }
+        
     }
 
 
     public void onHit(int value){
         bloodEffect.Play();
         currentHealth -= value;
+        GetComponent<SwordAttack>().AttackTime-= 0.5f;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
         Invoke("resetHitColor", AttackController.AttackDelay/2);
         rb.AddForce(new Vector2(PlayerController.rotateInt * hitPush, hitJump), ForceMode2D.Impulse);

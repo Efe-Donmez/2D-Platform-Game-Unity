@@ -169,7 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6987429062058978967}
   - component: {fileID: 8705172710899786289}
-  - component: {fileID: 6372200034142788748}
+  - component: {fileID: 820124525872052847}
   m_Layer: 3
   m_Name: Foots
   m_TagString: Untagged
@@ -224,7 +224,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0071254224, y: -0.17038423}
+  m_Offset: {x: 0.0071254224, y: -0.17143106}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -235,9 +235,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13960543, y: 0.051282108}
+  m_Size: {x: 0.13960543, y: 0.053375766}
   m_EdgeRadius: 0
---- !u!114 &6372200034142788748
+--- !u!114 &820124525872052847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7808977113488542414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8331cb33526b4404684778a44a59327c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ace3493ccb604b39b00b735f33f2231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8673350174977964389
@@ -482,6 +482,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b597442e-46a5-4b08-9bf3-6f3d950a2f6f
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a6260eb-f7f1-440e-bf47-19699cc114c3
+    m_ActionName: Player/Slide[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -565,6 +569,8 @@ MonoBehaviour:
   moveSpeed: 12
   jumpSpeed: 25
   animator: {fileID: 219919140792332711}
+  healtBar: {fileID: 0}
+  staminaBar: {fileID: 0}
   stepSound: {fileID: 8300000, guid: ea497651674514b7a9bee6404fc71cf9, type: 3}
 --- !u!114 &7517896421608314442
 MonoBehaviour:
@@ -612,7 +618,7 @@ MonoBehaviour:
   - {x: 0.021716569, y: -0.1394177, z: 0}
   m_ShapePathHash: 878267629
   m_Mesh: {fileID: 0}
-  m_InstanceId: 37276
+  m_InstanceId: 96812
   m_LocalBounds:
     m_Center: {x: 0.011424337, y: -0.02113682, z: 0}
     m_Extent: {x: 0.030971278, y: 0.12788795, z: 0}
