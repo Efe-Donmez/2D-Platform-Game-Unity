@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UISS/fight.uss?fileID=7433441132597879392&amp;guid=8e0171c15f2e541568a94a15829ef1c1&amp;type=3#fight" />
+    <ui:VisualElement name="top-panel" style="flex-grow: 0; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 0; border-right-width: 0; border-bottom-width: 5px; border-left-width: 0; flex-shrink: 0; height: 30%; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+        <ui:VisualElement style="flex-grow: 1; height: initial; justify-content: center; align-items: flex-start;">
+            <ui:Label tabindex="-1" text="Sovalye:&#10;Harcayacak zamanın kalmadı seni fakir ölüm artık seni bekliyor!" display-tooltip-when-elided="true" class="text" style="font-size: 50%; -unity-text-align: upper-left;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="main-panel" style="flex-grow: 100; flex-direction: row; align-items: center; justify-content: space-around; align-self: center;">
+        <ui:VisualElement name="left-panel" style="flex-grow: 1; height: 100%; background-image: none; width: 25%; flex-direction: column;">
+            <ui:VisualElement style="flex-grow: 15; flex-direction: row;">
+                <ui:VisualElement name="player" style="flex-grow: 8; background-image: url(&apos;project://database/Assets/RenderTexture/player.renderTexture?fileID=8400000&amp;guid=21c44277cd59543f79b3cdc90190941e&amp;type=2#player&apos;);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="health" style="flex-grow: 1; background-color: rgb(137, 137, 137); height: auto; align-items: center; align-self: auto; justify-content: center;">
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; height: 100%; background-color: rgb(255, 0, 0); opacity: 1; width: 75%; position: absolute; top: 0; left: 0;" />
+                <ui:Label tabindex="-1" text="24/80" parse-escape-sequences="true" display-tooltip-when-elided="true" style="position: absolute; left: -1px; right: auto; font-size: 24px; -unity-font-style: bold; -unity-font: url(&apos;project://database/Assets/Fonts/Gridular-Regular.otf?fileID=12800000&amp;guid=90ac0a73f7ebd428aad36ecd7324c13e&amp;type=3#Gridular-Regular&apos;); width: 100%; height: 33px; -unity-text-align: upper-center; color: rgb(255, 255, 255); -unity-text-outline-width: 1px; top: -5px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="center-panel" style="flex-grow: 2; height: 100%; border-top-width: 0; border-right-width: 5px; border-bottom-width: 0; border-left-width: 5px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); background-image: url(&apos;project://database/Assets/RenderTexture/gametexture.renderTexture?fileID=8400000&amp;guid=b608e36a7f5784f55b4362dc8a52d11d&amp;type=2#gametexture&apos;); width: 50%;" />
+        <ui:VisualElement name="right-panel" style="flex-grow: 1; height: 100%; background-color: rgba(0, 0, 0, 0); width: 25%;">
+            <ui:VisualElement style="flex-grow: 15; flex-direction: row;">
+                <ui:VisualElement name="player" style="flex-grow: 8; background-image: url(&apos;project://database/Assets/RenderTexture/enemy.renderTexture?fileID=8400000&amp;guid=c58bf634487ab4564af2121082a99b27&amp;type=2#enemy&apos;);" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; background-color: rgb(255, 16, 16);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="bottom-panel" style="height: 20%; flex-direction: row; align-items: center; justify-content: space-around; align-self: auto; width: 100%; border-top-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 5px; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;">
+        <ui:Button text="Saldır" display-tooltip-when-elided="true" focusable="false" class="fight-button" style="font-size: 50%;" />
+        <ui:Button text="Eylem" display-tooltip-when-elided="true" focusable="false" class="fight-button" style="font-size: 50%;" />
+        <ui:Button text="Envanter" display-tooltip-when-elided="true" focusable="false" class="fight-button" style="font-size: 50%;" />
+        <ui:Button text="Kaç" display-tooltip-when-elided="true" focusable="false" class="fight-button" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Gridular-Regular.otf?fileID=12800000&amp;guid=90ac0a73f7ebd428aad36ecd7324c13e&amp;type=3#Gridular-Regular&apos;); font-size: 50%;" />
+    </ui:VisualElement>
+</ui:UXML>

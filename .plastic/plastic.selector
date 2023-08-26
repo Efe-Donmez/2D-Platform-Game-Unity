@@ -1,0 +1,4 @@
+repository "project-Udy@trynstudios@cloud"
+  path "/"
+    br "/main"
+    co "/main"

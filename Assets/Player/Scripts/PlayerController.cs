@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Rigidbody2D rb;
+    Rigidbody2D rb;
     public float moveSpeed;
     public static int rotateInt;
     public float jumpSpeed;
@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     public static bool isFall = false;
     private Vector2 keyInput;
     public static bool isSlide = false;
-    public RectTransform healtBar;
-    public RectTransform staminaBar;
     public static float health = 100;
     public AudioClip stepSound;
     public ParticleSystem bloadEffect;
@@ -23,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         GlobalObjects.playerAudioSource.Play();
         health = PlayerInfos.health;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -47,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
 
 
+
         animator.SetBool("isAttack", isAttack);
 
         if (!isSlide)
@@ -64,10 +64,6 @@ public class PlayerController : MonoBehaviour
                 this.transform.eulerAngles = new Vector3(0, 180, 0);
             }
         }
-
-        staminaBar.sizeDelta = new Vector2(PlayerInfos.stamina, staminaBar.sizeDelta.y);
-        healtBar.sizeDelta = new Vector2(PlayerInfos.health, healtBar.sizeDelta.y);
-
         if (PlayerInfos.health != health)
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
